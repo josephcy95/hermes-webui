@@ -1331,6 +1331,100 @@
   :root.dark[data-skin="verdigris"] .img-lightbox-close:hover{background:rgba(200,154,90,.35);}
   :root.dark[data-skin="verdigris"] .img-lightbox-nav:hover{background:rgba(200,154,90,.40);}
 
+  /* ── Skin: Athena (parchment light / umber dark, olive accent) ──
+     Reading-first palette for long sessions, following the Sienna/Catppuccin
+     full-palette skin pattern. Body text is tuned to ~11-12:1 in both modes:
+     above WCAG AAA (7:1) but below the 17-21:1 glare band of pure
+     black-on-white / white-on-black that causes halation for astigmatic
+     readers. Surfaces are warm-neutral (no blue cast), status colors are
+     muted but all >=4.5:1 as text, and assistant prose uses the skin-scoped
+     editorial serif split sanctioned by docs/UIUX-GUIDE.md (UI and user
+     bubbles stay on the system sans; code stays mono). Contrast pairs are
+     pinned by tests/test_athena_skin.py. */
+  :root[data-skin="athena"]{
+    --bg:#F6F3EB;--sidebar:#EFEBE1;--surface:#FBF9F3;
+    --border:#DDD6C6;--border2:#C7BFAC;
+    --text:#33302A;--muted:#6B655A;--strong:#201D17;--em:#5D5748;
+    --accent:#55693E;--accent-hover:#46582F;--accent-text:#495C32;
+    --accent-bg:rgba(85,105,62,0.10);--accent-bg-strong:rgba(85,105,62,0.18);
+    --code-bg:#EFEADD;--code-inline-bg:rgba(32,29,23,0.055);--code-text:#75552A;--pre-text:#33302A;
+    --topbar-bg:rgba(246,243,235,0.96);--main-bg:rgba(246,243,235,0.55);
+    --input-bg:rgba(32,29,23,0.035);--hover-bg:rgba(32,29,23,0.05);
+    --focus-ring:rgba(85,105,62,0.30);--focus-glow:rgba(85,105,62,0.10);
+    --blue:#2F6B8F;--gold:#7E612A;
+    --error:#B23B35;--success:#47703F;--warning:#8A6116;--info:#2F6B8F;
+    --surface-subtle:rgba(32,29,23,0.025);--surface-subtle-hover:rgba(32,29,23,0.045);
+    --border-subtle:rgba(32,29,23,0.08);--border-muted:rgba(32,29,23,0.12);
+    --user-bubble-bg:#EBE6D8;--user-bubble-border:#DBD3C0;
+    --user-bubble-text:#33302A;--user-bubble-placeholder:#6B655A;
+    --user-selection-bg:rgba(85,105,62,0.24);--user-selection-text:#201D17;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    /* Skin-scoped token: screen-first book faces for long-form assistant
+       prose (Iowan/Charter/Georgia were designed for small screen sizes).
+       Scoped here because no base token carries a serif intent. */
+    --font-serif:"Iowan Old Style",Charter,"Bitstream Charter",Georgia,Cambria,"Noto Serif",serif;
+  }
+  :root.dark[data-skin="athena"]{
+    --bg:#1B1915;--sidebar:#211E19;--surface:#262320;
+    --border:#38342C;--border2:#4A4438;
+    --text:#D9D3C7;--muted:#9C9585;--strong:#EFEADF;--em:#C2BAA8;
+    --accent:#A3B784;--accent-hover:#B4C795;--accent-text:#B7C99B;
+    --accent-bg:rgba(163,183,132,0.10);--accent-bg-strong:rgba(163,183,132,0.18);
+    --code-bg:#232019;--code-inline-bg:rgba(255,255,255,0.06);--code-text:#C9B583;--pre-text:#D5CFC2;
+    --topbar-bg:rgba(33,30,25,0.97);--main-bg:rgba(27,25,21,0.55);
+    --input-bg:rgba(255,255,255,0.04);--hover-bg:rgba(255,255,255,0.06);
+    --focus-ring:rgba(163,183,132,0.35);--focus-glow:rgba(163,183,132,0.10);
+    --blue:#82A9C9;--gold:#C7A45C;
+    --error:#D98079;--success:#96B489;--warning:#D2A961;--info:#82A9C9;
+    --surface-subtle:rgba(255,255,255,0.025);--surface-subtle-hover:rgba(255,255,255,0.045);
+    --border-subtle:rgba(255,255,255,0.07);--border-muted:rgba(255,255,255,0.11);
+    --user-bubble-bg:#282520;--user-bubble-border:#3C372E;
+    --user-bubble-text:#E0DACE;--user-bubble-placeholder:#9C9585;
+    --user-selection-bg:rgba(163,183,132,0.28);--user-selection-text:#EFEADF;
+  }
+  /* Assistant prose in the reading serif; headings and tables inside prose
+     return to the sans stack so hierarchy stays crisp. User bubbles and
+     functional UI keep the system sans per docs/UIUX-GUIDE.md. */
+  :root[data-skin="athena"] .msg-row[data-role="assistant"] .msg-body{font-family:var(--font-serif);}
+  :root[data-skin="athena"] .msg-row[data-role="assistant"] .msg-body :is(h1,h2,h3,h4,h5,h6,table){font-family:var(--font-ui);}
+  :root[data-skin="athena"] .msg-body code,
+  :root[data-skin="athena"] .msg-body pre,
+  :root[data-skin="athena"] .preview-code,
+  :root[data-skin="athena"] .preview-md code,
+  :root[data-skin="athena"] .tool-card-name,
+  :root[data-skin="athena"] .tool-arg-key,
+  :root[data-skin="athena"] .tool-arg-val,
+  :root[data-skin="athena"] .tool-card-result pre,
+  :root[data-skin="athena"] .app-titlebar-sub{font-family:var(--font-mono);}
+  /* Warm text on near-black blooms with subpixel rendering; grayscale
+     antialiasing keeps strokes even. Light mode keeps subpixel sharpness. */
+  :root.dark[data-skin="athena"],
+  :root.dark[data-skin="athena"] body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  /* New-chat button: solid olive with a legible label (specificity boosted to
+     beat the base :root:not(.dark) .new-chat-btn accent-text rule). */
+  :root[data-skin="athena"]:not(.dark) .new-chat-btn,
+  :root.dark[data-skin="athena"] .new-chat-btn{background:var(--accent);border-color:var(--accent);color:#FFFFFF;font-weight:600;box-shadow:none;}
+  :root.dark[data-skin="athena"] .new-chat-btn{color:#1B1915;}
+  :root[data-skin="athena"]:not(.dark) .new-chat-btn:hover,
+  :root.dark[data-skin="athena"] .new-chat-btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);}
+  /* Tool cards: quiet tint, olive only while running */
+  :root[data-skin="athena"] .tool-card{background:var(--surface-subtle);border-color:var(--border);}
+  :root[data-skin="athena"] .tool-card:hover{border-color:var(--border2);}
+  :root[data-skin="athena"] .tool-card-running{background:var(--accent-bg);border-color:var(--accent-bg-strong);}
+  :root[data-skin="athena"] .tool-arg-key,
+  :root[data-skin="athena"] .tool-card-more{color:var(--accent-text);}
+  :root[data-skin="athena"] .tool-card-running-dot{background:var(--accent);}
+  :root[data-skin="athena"] .msg-body a{color:var(--accent-text);}
+  /* Active session: olive wayfinding rail */
+  :root[data-skin="athena"] .session-item.active{border-left:2px solid var(--accent);}
+  /* Low-contrast scrollbars (Verdigris pattern) */
+  :root[data-skin="athena"]::-webkit-scrollbar-thumb{background:rgba(32,29,23,0.18);border-radius:4px;}
+  :root[data-skin="athena"]::-webkit-scrollbar-thumb:hover{background:rgba(32,29,23,0.30);}
+  :root[data-skin="athena"]{scrollbar-width:thin;scrollbar-color:rgba(32,29,23,0.18) transparent;}
+  :root.dark[data-skin="athena"]::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.14);}
+  :root.dark[data-skin="athena"]::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.24);}
+  :root.dark[data-skin="athena"]{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.14) transparent;}
+
   /* #594: app-dialog light mode overrides — base styles use hardcoded dark gradients */
   :root:not(.dark) .app-dialog{
     background:linear-gradient(180deg,rgba(240,237,232,.99),rgba(228,224,216,.99));

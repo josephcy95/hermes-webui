@@ -9243,6 +9243,7 @@ _SETTINGS_SKIN_VALUES = {
     "verdigris",
     "neon-soft",
     "neon-paint",
+    "athena",
 }
 _SETTINGS_LEGACY_THEME_MAP = {
     # Legacy full themes now map onto the closest supported theme + accent skin pair.
